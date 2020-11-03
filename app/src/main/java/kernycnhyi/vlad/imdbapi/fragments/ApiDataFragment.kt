@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kernycnhyi.vlad.imdbapi.MyRecyclerAdapter
 import kernycnhyi.vlad.imdbapi.R
+import kernycnhyi.vlad.imdbapi.adapters.MyRecyclerAdapter
 import kernycnhyi.vlad.imdbapi.interfaces.RecyclerMediaView
 import kernycnhyi.vlad.imdbapi.model.Movie
 import kernycnhyi.vlad.imdbapi.presenters.ApiPresenter
-import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
-class ApiDataFragment : MvpAppCompatFragment(), RecyclerMediaView {
+class ApiDataFragment : BaseFragment(), RecyclerMediaView {
 
-    lateinit var recyclerAdapter: MyRecyclerAdapter
+    private val recyclerAdapter: MyRecyclerAdapter by lazy {
+        MyRecyclerAdapter()
+    }
 
     @InjectPresenter
     lateinit var presenter: ApiPresenter
@@ -26,13 +27,11 @@ class ApiDataFragment : MvpAppCompatFragment(), RecyclerMediaView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        recyclerAdapter = MyRecyclerAdapter(emptyList())
         val view= inflater.inflate(R.layout.fragment_api_data, container, false) as RecyclerView
-        view.apply {
+        return view.apply {
             layoutManager = GridLayoutManager(activity,1)
             adapter = recyclerAdapter
         }
-        return view
     }
 
     override fun showMovies(list: List<Movie>) {
@@ -40,6 +39,6 @@ class ApiDataFragment : MvpAppCompatFragment(), RecyclerMediaView {
     }
 
     override fun showError() {
-
+        showErrorDialog()
     }
 }

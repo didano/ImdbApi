@@ -13,7 +13,9 @@ object ApiFactory {
     private const val API_KEY_NAME = "apikey"
     private const val API_KEY = "514513d9"
 
-    private fun createRetrofit(): Retrofit {
+    lateinit var apiService:ApiService
+
+    fun createRetrofit() {
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(
                 HttpLoggingInterceptor()
@@ -32,14 +34,11 @@ object ApiFactory {
             .setLenient()
             .create()
 
-        return Retrofit.Builder()
+        apiService =  Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .baseUrl(BASE_URL)
             .client(httpClient)
-            .build()
+            .build().create(ApiService::class.java)
     }
-
-    val apiService: ApiService = createRetrofit().create(ApiService::class.java)
-
 }
