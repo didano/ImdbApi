@@ -17,7 +17,7 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             .subscribe({
                 viewState.showMovies(it!!)
             },{
-                viewState.showError()
+                viewState.showError(it.message)
             })
     }
 

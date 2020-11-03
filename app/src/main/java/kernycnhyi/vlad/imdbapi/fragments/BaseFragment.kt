@@ -13,16 +13,22 @@ open class BaseFragment : MvpAppCompatFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_blank, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_blank, container, false)
 
-    fun showErrorDialog(){
+    fun showErrorDialog(error: String?) {
         val builder = AlertDialog.Builder(activity)
-        builder.setMessage(getString(R.string.dialog_error_text))
-            .setPositiveButton(R.string.dialog_error_text
-            ) { dialog, _ -> dialog.dismiss() }
-        builder.create().show()
+        when (error) {
+            null -> {
+                builder.setMessage(getString(R.string.dialog_error_text))
+            }
+            else -> {
+                builder.setMessage(error)
+            }
+        }
+        builder.setPositiveButton(getString(R.string.ok_button_text)) { dialog, _ ->  dialog.dismiss() }
+            .create()
+            .show()
+
     }
 
 

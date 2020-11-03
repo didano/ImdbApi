@@ -13,5 +13,5 @@ interface RecyclerMediaView : MvpView {
     fun showMovies(list: List<Movie>)
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun showError()
+    fun showError(error:String? = null)
 }

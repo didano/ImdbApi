@@ -14,9 +14,8 @@ class MyRecyclerAdapter : RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder>()
     var movieList: List<Movie> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_card, parent, false)
-        return MyViewHolder(view)
+        return MyViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.recycler_item_card, parent, false))
     }
 
     override fun getItemCount(): Int = movieList.size
