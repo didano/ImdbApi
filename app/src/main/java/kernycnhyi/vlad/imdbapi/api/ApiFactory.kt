@@ -30,12 +30,8 @@ object ApiFactory {
                 it.proceed(request)
             }.build()
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-
         apiService =  Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .baseUrl(BASE_URL)
             .client(httpClient)

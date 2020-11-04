@@ -15,7 +15,9 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.search }
             .subscribe({
-                viewState.showMovies(it!!)
+                it?.let {
+                    viewState.showMovies(it)
+                }
             },{
                 viewState.showError(it.message)
             })

@@ -32,11 +32,7 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = recyclerAdapter
-        if(requireContext().resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
-        } else {
-            recyclerView.layoutManager = GridLayoutManager(requireContext(),1)
-        }
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),resources.getInteger(R.integer.columns_count))
     }
 
     override fun showMovies(list: List<Movie>) {

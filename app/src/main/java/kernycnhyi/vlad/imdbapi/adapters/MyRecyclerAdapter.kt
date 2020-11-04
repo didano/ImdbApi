@@ -21,9 +21,12 @@ class MyRecyclerAdapter : RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder>()
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.titleTextView.text = movieList[position].title
-        holder.yearTextView.text = movieList[position].year
-        holder.posterImageView.loadImage(movieList[position].poster)
+        with(movieList[position]){
+            holder.titleTextView.text = this.title
+            holder.yearTextView.text = this.year
+            holder.posterImageView.loadImage(this.poster)
+        }
+
     }
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
