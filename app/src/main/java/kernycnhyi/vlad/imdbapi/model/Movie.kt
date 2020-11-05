@@ -15,4 +15,7 @@ data class Movie(
 
     @SerializedName("Poster")
     @Expose
-    val poster: String)
+    var poster: String,
+
+    var isYounger: Boolean
+)

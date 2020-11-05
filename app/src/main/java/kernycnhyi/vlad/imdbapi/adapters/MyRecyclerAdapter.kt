@@ -23,14 +23,18 @@ class MyRecyclerAdapter : RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder>()
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(movieList[position]) {
+            if (this.isYounger)
+                holder.olderBadge.visibility = View.VISIBLE
+            else
+                holder.olderBadge.visibility = View.GONE
             holder.titleTextView.text = this.title
             holder.yearTextView.text = this.year
             holder.posterImageView.loadImage(this.poster)
         }
-
     }
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val olderBadge = view.olderMovieBadge
         val posterImageView = view.poster
         val titleTextView = view.titleTextView
         val yearTextView = view.yearTextView

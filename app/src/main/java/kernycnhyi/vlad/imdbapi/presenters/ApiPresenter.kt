@@ -13,12 +13,19 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
         ApiFactory.apiService.getAllMoviesByTitle("Batman")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.search }
+            .map {
+                it.search?.map { movie ->
+                    if (movie.year.takeLast(4).toInt() >= 2000) {
+                        movie.isYounger = true
+                    }
+                    movie
+                }
+            }
             .subscribe({
                 it?.let {
                     viewState.showMovies(it)
                 }
-            },{
+            }, {
                 viewState.showError(it.message)
             })
     }

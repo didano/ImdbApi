@@ -1,7 +1,6 @@
 package kernycnhyi.vlad.imdbapi.fragments
 
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,8 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = recyclerAdapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),resources.getInteger(R.integer.columns_count))
+        recyclerView.layoutManager =
+            GridLayoutManager(requireContext(), resources.getInteger(R.integer.columns_count))
     }
 
     override fun showMovies(list: List<Movie>) {
