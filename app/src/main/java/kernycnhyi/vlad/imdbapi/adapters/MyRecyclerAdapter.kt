@@ -13,15 +13,16 @@ class MyRecyclerAdapter : RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder>()
 
     var movieList: List<Movie> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_item_card, parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
+        MyViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.recycler_item_card, parent, false)
+        )
 
     override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        with(movieList[position]){
+        with(movieList[position]) {
             holder.titleTextView.text = this.title
             holder.yearTextView.text = this.year
             holder.posterImageView.loadImage(this.poster)

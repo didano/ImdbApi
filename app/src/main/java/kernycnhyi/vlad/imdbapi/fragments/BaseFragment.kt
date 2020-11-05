@@ -17,11 +17,11 @@ open class BaseFragment : MvpAppCompatFragment() {
 
     fun showErrorDialog(error: String?) {
         AlertDialog.Builder(activity).apply {
-            error ?: getString(R.string.dialog_error_text)
-            this.setMessage(error)
+            this.setMessage(error ?: getString(R.string.dialog_error_text))
                 .setPositiveButton(getString(R.string.ok_button_text)) { dialog, _ -> dialog.dismiss() }
                 .create()
                 .show()
+
         }
     }
 }
