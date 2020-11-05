@@ -17,5 +17,8 @@ data class Movie(
     @Expose
     var poster: String,
 
-    var isYounger: Boolean
+    @SerializedName("Type")
+    @Expose
+    var type: String,
+    var isYounger: Boolean = false
 )

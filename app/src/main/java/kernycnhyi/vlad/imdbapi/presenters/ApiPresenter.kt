@@ -15,7 +15,7 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 it.search?.map { movie ->
-                    if (movie.year.takeLast(4).toInt() >= 2000) {
+                    if (movie.year.takeLast(4).toInt() >= YEAR) {
                         movie.isYounger = true
                     }
                     movie
@@ -28,6 +28,10 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             }, {
                 viewState.showError(it.message)
             })
+    }
+
+    companion object {
+        const val YEAR = 2000
     }
 
 }

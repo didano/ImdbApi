@@ -32,6 +32,15 @@
             app:layout_constraintStart_toStartOf="@id/poster"
             app:layout_constraintTop_toTopOf="@id/poster" />
 
+        <ImageView
+            android:id="@+id/serialBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fiber_manual_record_black_32dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/poster"
+            app:layout_constraintTop_toTopOf="@id/poster" />
+
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
