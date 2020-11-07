@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/constraint_padding"
-        android:background="@color/movies_background">
+        android:background="@color/series_background"
+        android:padding="@dimen/constraint_padding">
 
         <ImageView
-            android:id="@+id/poster"
+            android:id="@+id/seriesPoster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/image_view_in_card_margin"
@@ -25,16 +25,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/olderMovieBadge"
+            android:id="@+id/olderSeriesBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_beenhere_black_32dp"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/poster"
-            app:layout_constraintTop_toTopOf="@id/poster" />
+            app:layout_constraintStart_toStartOf="@id/seriesPoster"
+            app:layout_constraintTop_toTopOf="@id/seriesPoster" />
+
+        <ImageView
+            android:id="@+id/serialBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fiber_manual_record_black_32dp"
+            app:layout_constraintEnd_toEndOf="@id/seriesPoster"
+            app:layout_constraintTop_toTopOf="@id/seriesPoster" />
 
         <TextView
-            android:id="@+id/titleTextView"
+            android:id="@+id/seriesTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_text_left_margin"
@@ -42,18 +50,18 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/poster"
+            app:layout_constraintTop_toBottomOf="@+id/seriesPoster"
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/yearTextView"
+            android:id="@+id/seriesYearTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/seriesTitleTextView"
             tools:text="Year" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kernycnhyi.vlad.imdbapi.R
 import kernycnhyi.vlad.imdbapi.adapters.MyRecyclerAdapter
 import kernycnhyi.vlad.imdbapi.interfaces.RecyclerMediaView
-import kernycnhyi.vlad.imdbapi.model.Movie
+import kernycnhyi.vlad.imdbapi.model.BaseMovieModel
 import kernycnhyi.vlad.imdbapi.presenters.ApiPresenter
 import kotlinx.android.synthetic.main.fragment_api_data.*
 import moxy.presenter.InjectPresenter
@@ -35,7 +35,7 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
             GridLayoutManager(requireContext(), resources.getInteger(R.integer.columns_count))
     }
 
-    override fun showMovies(list: List<Movie>) {
+    override fun showMovies(list: List<BaseMovieModel>) {
         recyclerAdapter.updateList(list)
     }
 
