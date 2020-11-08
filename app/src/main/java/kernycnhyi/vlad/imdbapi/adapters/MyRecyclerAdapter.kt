@@ -1,6 +1,5 @@
 package kernycnhyi.vlad.imdbapi.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +48,6 @@ class MyRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bindHolder() {
             with(movieList[adapterPosition]) {
-                Log.d("VISIBILITY", isYounger.toString())
                 olderBadge.isVisible(isYounger)
                 posterImageView.loadImage(poster)
                 titleTextView.text = title
@@ -80,11 +78,8 @@ class MyRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (getItemViewType(position) == SERIES_HOLDER) {
-            (holder as SerialHolder).bindHolder()
-        } else {
-            (holder as MovieHolder).bindHolder()
-        }
+        (holder as? SerialHolder)?.bindHolder()
+        (holder as? MovieHolder)?.bindHolder()
     }
 
     companion object {
