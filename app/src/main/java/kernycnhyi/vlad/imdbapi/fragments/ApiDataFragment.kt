@@ -47,7 +47,7 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
     }
 
     override fun showError(error: String?) {
-
+        showErrorDialog(error)
     }
 
 }
