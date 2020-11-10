@@ -1,7 +1,7 @@
 package kernycnhyi.vlad.imdbapi.presenters
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import moxy.MvpPresenter
 import moxy.MvpView
 
@@ -15,7 +15,7 @@ open class BasePresenter<T : MvpView> : MvpPresenter<T>() {
         dispoable.dispose()
     }
 
-    fun Disposable.unsubscribeOnDestroy(): Disposable{
+    fun Disposable.unsubscribeOnDestroy(): Disposable {
         dispoable.add(this)
         return this
     }
