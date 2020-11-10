@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName
 data class SearchList(
     @SerializedName("Search")
     @Expose
-    val search: List<Movie>? = null
+    val search: List<BaseMovieModel>? = null
 )

@@ -10,17 +10,30 @@ import moxy.InjectViewState
 class ApiPresenter : BasePresenter<RecyclerMediaView>() {
 
     init {
-        ApiFactory.apiService.getAllMoviesByTitle("Batman")
+        ApiFactory.apiService.getAllMoviesByTitle("Dead")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.search }
+            .map {
+                it.search?.map { model ->
+                    if (model.year.take(4).toInt() >= YEAR)
+                        model.isYounger = true
+                    if (model.type == "movie")
+                        model.baseToMovie()
+                    else
+                        model.baseToSeries()
+                }
+            }
             .subscribe({
                 it?.let {
                     viewState.showMovies(it)
                 }
-            },{
+            }, {
+                it.printStackTrace()
                 viewState.showError(it.message)
             })
     }
 
+    companion object {
+        const val YEAR = 2000
+    }
 }

@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="series_background">#22B482</color>
+    <color name="movies_background">#7E48F7</color>
+    <color name="recycler_background">#A5CCF8</color>
 </resources>

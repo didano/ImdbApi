@@ -1,18 +1,10 @@
 package kernycnhyi.vlad.imdbapi.model
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-
-
 data class Movie(
-    @SerializedName("Title")
-    @Expose
-    val title: String,
+    val movieTitle: String,
+    val movieYear: String,
+    val moviePoster: String,
+    val movieType: String,
+    var movieYounger: Boolean
+) : BaseMovieModel(movieTitle, movieYear, moviePoster, movieType, movieYounger)
 
-    @SerializedName("Year")
-    @Expose
-    val year: String,
-
-    @SerializedName("Poster")
-    @Expose
-    val poster: String)

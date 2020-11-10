@@ -8,4 +8,6 @@
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="small_card_margin">8dp</dimen>
     <dimen name="card_title_text_size">18sp</dimen>
+    <dimen name="image_view_in_card_margin">25dp</dimen>
+    <dimen name="card_margin">30dp</dimen>
 </resources>
