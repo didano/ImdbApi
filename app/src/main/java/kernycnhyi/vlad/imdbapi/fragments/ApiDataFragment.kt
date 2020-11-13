@@ -44,7 +44,7 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
         inflater.inflate(R.menu.search_actionbar, menu)
         val actionMenuButton = menu.findItem(R.id.actionSearch)
         val searchView = SearchView((activity as MainActivity).supportActionBar?.themedContext)
-        actionMenuButton.setActionView(searchView)
+        actionMenuButton.actionView = searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {

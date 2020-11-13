@@ -15,19 +15,18 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
         fromDbData()
     }
 
-    fun doQuery(query: String) {
-        if (query.isEmpty()) {
+    fun doQuery(query: String) = when {
+        query.isEmpty() -> {
             fromDbData()
-            return
         }
-        if (ApiFactory.CONNECTION) {
+        ApiFactory.CONNECTION -> {
             withConnectionData(query)
-            return
-        } else {
+        }
+        else -> {
             fromDbData()
-            return
         }
     }
+
 
     fun withConnectionData(query: String) {
         ApiFactory.apiService.getAllMoviesByTitle(query)
@@ -83,4 +82,5 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
     companion object {
         const val YEAR = 2000
     }
+
 }
