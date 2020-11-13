@@ -1,6 +1,5 @@
 package kernycnhyi.vlad.imdbapi.fragments
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import kernycnhyi.vlad.imdbapi.R
 import kernycnhyi.vlad.imdbapi.adapters.MyRecyclerAdapter
+import kernycnhyi.vlad.imdbapi.api.ApiFactory
 import kernycnhyi.vlad.imdbapi.interfaces.RecyclerMediaView
 import kernycnhyi.vlad.imdbapi.model.BaseMovieModel
 import kernycnhyi.vlad.imdbapi.presenters.ApiPresenter
@@ -33,6 +33,13 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager =
             GridLayoutManager(requireContext(), resources.getInteger(R.integer.columns_count))
+        floatingActionButton.setOnClickListener {
+            if (ApiFactory.CONNECTION) {
+                presenter.withConnectionData()
+            } else {
+                presenter.fromDbData()
+            }
+        }
     }
 
     override fun showMovies(list: List<BaseMovieModel>) {
@@ -42,4 +49,5 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
     override fun showError(error: String?) {
         showErrorDialog(error)
     }
+
 }
