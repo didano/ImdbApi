@@ -12,15 +12,24 @@ import moxy.InjectViewState
 class ApiPresenter : BasePresenter<RecyclerMediaView>() {
 
     init {
-        if (ApiFactory.CONNECTION) {
-            withConnectionData()
-        } else {
+        fromDbData()
+    }
+
+    fun doQuery(query: String) = when {
+        query.isEmpty() -> {
+            fromDbData()
+        }
+        ApiFactory.CONNECTION -> {
+            withConnectionData(query)
+        }
+        else -> {
             fromDbData()
         }
     }
 
-    fun withConnectionData() {
-        ApiFactory.apiService.getAllMoviesByTitle("Joker")
+
+    fun withConnectionData(query: String) {
+        ApiFactory.apiService.getAllMoviesByTitle(query)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .map { model ->
@@ -73,4 +82,5 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
     companion object {
         const val YEAR = 2000
     }
+
 }

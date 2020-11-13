@@ -1,13 +1,12 @@
 package kernycnhyi.vlad.imdbapi.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import kernycnhyi.vlad.imdbapi.MainActivity
 import kernycnhyi.vlad.imdbapi.R
 import kernycnhyi.vlad.imdbapi.adapters.MyRecyclerAdapter
-import kernycnhyi.vlad.imdbapi.api.ApiFactory
 import kernycnhyi.vlad.imdbapi.interfaces.RecyclerMediaView
 import kernycnhyi.vlad.imdbapi.model.BaseMovieModel
 import kernycnhyi.vlad.imdbapi.presenters.ApiPresenter
@@ -22,6 +21,7 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
 
     @InjectPresenter
     lateinit var presenter: ApiPresenter
+    private var query = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +34,30 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
         recyclerView.layoutManager =
             GridLayoutManager(requireContext(), resources.getInteger(R.integer.columns_count))
         floatingActionButton.setOnClickListener {
-            if (ApiFactory.CONNECTION) {
-                presenter.withConnectionData()
-            } else {
-                presenter.fromDbData()
-            }
+            presenter.doQuery(query)
         }
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_actionbar, menu)
+        val actionMenuButton = menu.findItem(R.id.actionSearch)
+        val searchView = SearchView((activity as MainActivity).supportActionBar?.themedContext)
+        actionMenuButton.actionView = searchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    presenter.doQuery(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
     }
 
     override fun showMovies(list: List<BaseMovieModel>) {
