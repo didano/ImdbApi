@@ -12,15 +12,25 @@ import moxy.InjectViewState
 class ApiPresenter : BasePresenter<RecyclerMediaView>() {
 
     init {
+        fromDbData()
+    }
+
+    fun doQuery(query: String) {
+        if (query.isEmpty()) {
+            fromDbData()
+            return
+        }
         if (ApiFactory.CONNECTION) {
-            withConnectionData()
+            withConnectionData(query)
+            return
         } else {
             fromDbData()
+            return
         }
     }
 
-    fun withConnectionData() {
-        ApiFactory.apiService.getAllMoviesByTitle("Joker")
+    fun withConnectionData(query: String) {
+        ApiFactory.apiService.getAllMoviesByTitle(query)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .map { model ->

@@ -11,9 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/movies_background"
         android:orientation="vertical"
-        android:padding="@dimen/constraint_padding"
-        android:background="@color/movies_background">
+        android:padding="@dimen/constraint_padding">
 
         <ImageView
             android:id="@+id/poster"
