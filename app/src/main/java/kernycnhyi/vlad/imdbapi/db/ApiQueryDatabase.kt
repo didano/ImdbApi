@@ -11,7 +11,7 @@ import kernycnhyi.vlad.imdbapi.model.BaseMovieModel
 abstract class ApiQueryDatabase : RoomDatabase() {
 
     companion object {
-        private const val DB_NAME = "query_db"
+        const val DB_NAME = "query_db"
         var db: ApiQueryDatabase? = null
         private val LOCK = Any()
 

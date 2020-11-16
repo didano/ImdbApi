@@ -28,7 +28,7 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
     }
 
 
-    fun withConnectionData(query: String) {
+    private fun withConnectionData(query: String) {
         ApiFactory.apiService.getAllMoviesByTitle(query)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
@@ -54,7 +54,7 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             }).unsubscribeOnDestroy()
     }
 
-    fun fromDbData() {
+    private fun fromDbData() {
         ApiQueryDatabase.db!!.queryDao().getAllQueries()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -77,6 +77,22 @@ class ApiPresenter : BasePresenter<RecyclerMediaView>() {
             model.baseToMovie()
         else
             model.baseToSeries()
+    }
+
+    fun filterList(year: String) {
+        ApiQueryDatabase.db!!.queryDao().getAllQueries()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { model ->
+                model.filter {
+                    it.year.take(4)==year.take(4)
+                }.map { isYoungerAndTypeCondition(it) }
+            }
+            .subscribe({
+                it?.let { viewState.showMovies(it) }
+            }, {
+                viewState.showError(it.message)
+            }).unsubscribeOnDestroy()
     }
 
     companion object {

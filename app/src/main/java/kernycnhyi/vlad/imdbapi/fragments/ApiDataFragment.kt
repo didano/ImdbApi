@@ -1,5 +1,6 @@
 package kernycnhyi.vlad.imdbapi.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -10,6 +11,7 @@ import kernycnhyi.vlad.imdbapi.adapters.MyRecyclerAdapter
 import kernycnhyi.vlad.imdbapi.interfaces.RecyclerMediaView
 import kernycnhyi.vlad.imdbapi.model.BaseMovieModel
 import kernycnhyi.vlad.imdbapi.presenters.ApiPresenter
+import kotlinx.android.synthetic.main.filter_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_api_data.*
 import moxy.presenter.InjectPresenter
 
@@ -58,6 +60,34 @@ class ApiDataFragment : BaseFragment(), RecyclerMediaView {
             }
 
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.actionFilter) {
+            showFilterDialog()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun showFilterDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.filter_dialog, null)
+        val alertDialog = AlertDialog.Builder(context).create()
+        alertDialog.setView(dialogView)
+        val editText = dialogView.filterEditText
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "Filter"
+        ) { dialog, which ->
+            presenter.filterList(editText.text.toString())
+            dialog.dismiss()
+        }
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel") { dialog, which ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
     }
 
     override fun showMovies(list: List<BaseMovieModel>) {
